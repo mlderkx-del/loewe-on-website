@@ -472,7 +472,11 @@
         </div>
         
        <div class="offline-experience-container fixed inset-0 z-50 hidden overflow-y-auto" id="offlineExperienceContainer" style="z-index: 20000;">
-            <div class="relative w-full h-screen bg-gray-900 overflow-hidden">
+           <button id="closeOfflineBtn"
+            class="fixed top-6 right-6 z-[999999] text-white text-4xl hover:text-gray-300 pointer-events-auto">
+            <i class="fas fa-times"></i>
+            </button> 
+           <div class="relative w-full h-screen bg-gray-900 overflow-hidden">
             <iframe
               class="absolute inset-0 w-full h-full z-10"
               src="https://www.youtube.com/embed/bbGEYZxV4vw?controls=1&mute=0&autoplay=0&playsinline=1&rel=0&origin=https://mlderkx-del.github.io"
@@ -1303,16 +1307,23 @@ The experience extends beyond the physical space, becoming a lasting connection 
         });
     </script>
 <script>
-  const closeBtn = document.getElementById('closeExperienceBtn');
+  function closeAllOverlays() {
+    const offline = document.getElementById('offlineExperienceContainer');
+    const fullscreen = document.getElementById('fullscreenVideoContainer');
 
-  if (closeBtn) {
-    closeBtn.addEventListener('click', () => {
-      if (window.history.length > 1) {
-        window.history.back();
-      } else {
-        window.location.href = 'aaa.html'; // ← 改成你的 aaa 页面
-      }
-    });
+    if (offline) offline.classList.add('hidden');
+    if (fullscreen) fullscreen.classList.add('hidden');
+
+    // 恢复页面滚动（不管你之前有没有锁）
+    document.body.style.overflow = '';
   }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    const closeOfflineBtn = document.getElementById('closeOfflineBtn');
+    const closeExperienceBtn = document.getElementById('closeExperienceBtn'); // 你原来的那个
+
+    if (closeOfflineBtn) closeOfflineBtn.addEventListener('click', closeAllOverlays);
+    if (closeExperienceBtn) closeExperienceBtn.addEventListener('click', closeAllOverlays);
+  });
 </script>
 </body></html>
