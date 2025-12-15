@@ -1302,5 +1302,17 @@ The experience extends beyond the physical space, becoming a lasting connection 
             }
         });
     </script>
+<script>
+  const closeBtn = document.getElementById('closeExperienceBtn');
 
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      if (window.history.length > 1) {
+        window.history.back();
+      } else {
+        window.location.href = 'aaa.html'; // ← 改成你的 aaa 页面
+      }
+    });
+  }
+</script>
 </body></html>
